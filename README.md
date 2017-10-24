@@ -6,7 +6,7 @@ Auditable Entities
 ===================
 First of all, you need to mark all your auditable entities using  `Auditable` and  `NotAuditable` attributes.
 
-**Auditable:** Can be used to mark a class (including all properties).
+**Auditable:** Can be used to mark a class (including all properties without object references ).
 **NotAuditable:** Marks a property as not auditable.
 
 Enable Audit
@@ -17,6 +17,30 @@ You have two way to use it
 ``` services.AddAudit(); ```
   
 ```csharp
+[Auditable]
+public class Blog
+{
+    public Blog()
+    {
+        Posts = new List<Post>();
+    }
+    public int BlogId { get; set; }
+    public string Url { get; set; }
+
+    public List<Post> Posts { get; set; }
+}
+
+[Auditable]
+public class Post
+{
+    public int PostId { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public int BlogId { get; set; }
+    public Blog Blog { get; set; }
+}
+
 public class BloggingContext : AuditContext
 {
     public DbSet<Blog> Blogs { get; set; }
