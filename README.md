@@ -11,7 +11,7 @@ First of all, you need to mark all your auditable entities using  `Auditable` an
 
 Enable Audit
 =============
-Install EF.Audit (version >= 3.0.0) nuget package.
+Install EF.Audit.Core (version >= 1.0.0) nuget package.
 You have two way to use it 
 1 - Your dbcontext will inherit the AuditContext and adds services required for using AuditContext.
 ``` services.AddAudit(); ```
